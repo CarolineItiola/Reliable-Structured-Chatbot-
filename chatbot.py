@@ -6,9 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.getenv("ANTHROPIC_API_KEY") or st.secrets.get
-("ANTHROPIC_API_KEY")
-client = Anthropic(api_key=api_key
+try:
+    api_key = st.secrets["ANTHROPIC_API_KEY"]
+except:
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+client = Anthropic(api_key=api_key)
 model = "claude-sonnet-4-5"
 
 cache_stats = {
