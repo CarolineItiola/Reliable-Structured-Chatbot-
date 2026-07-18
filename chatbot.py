@@ -1,11 +1,14 @@
 import os
 import json
+import streamlit as st
 from anthropic import Anthropic
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+api_key = os.getenv("ANTHROPIC_API_KEY") or st.secrets.get
+("ANTHROPIC_API_KEY")
+client = Anthropic(api_key=api_key
 model = "claude-sonnet-4-5"
 
 cache_stats = {
